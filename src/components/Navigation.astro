@@ -1,0 +1,131 @@
+---
+const navItems = [
+  { href: '/', text: '首页' },
+  { href: '/process equipment', text: '工艺设备' },
+  { href: '/chemical', text: '化工原料' },
+  { href: '/service', text: '服务' },
+  { href: '/blog', text: '博客' },
+  { href: '/contact', text: '联系我们' },
+];
+
+const languages = [
+  { code: 'zh', flag: '🇨🇳', name: '中文' },
+  { code: 'en', flag: '🇺🇸', name: 'English' },
+];
+
+import ThemeIcon from './ThemeIcon.astro';
+---
+
+<header>
+  <nav>
+    <div class="logo">
+      <a href="/">
+        <img 
+          src="/WT LOGO.svg"
+          alt="厦门唯特机电有限公司Logo"
+          width="100"
+          height="48"
+        />
+      </a>
+    </div>
+    <div class="nav-items">
+      <ul>
+        {navItems.map((item) => (
+          <li><a href={item.href}>{item.text}</a></li>
+        ))}
+      </ul>
+      <div class="language-switcher">
+        <select>
+          {languages.map((lang) => (
+            <option value={lang.code}>{lang.flag} {lang.name}</option>
+          ))}
+        </select>
+      </div>
+      <div class="theme-icon">
+        <ThemeIcon />
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    background-color: #534f4f;
+    padding: 1rem 0;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  .logo img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 1rem;
+  }
+  .nav-items {
+    display: flex;
+    align-items: center;
+  }
+  .nav-items ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .nav-items li {
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .nav-items a {
+    color: #a19d9d;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .nav-items a:hover {
+    color: #EC6C39;
+  }
+  .language-switcher {
+    margin-left: 1rem;
+  }
+  .language-switcher select {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #bb86fc;
+    padding: 0.25rem;
+  }
+  .theme-icon {
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .nav-items {
+      margin-top: 1rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .nav-items ul {
+      flex-direction: column;
+    }
+    .nav-items li {
+      margin-left: 0;
+      margin-bottom: 0.5rem;
+    }
+    .language-switcher, .theme-icon {
+      margin-left: 0;
+      margin-top: 0.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,177 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+import unpackingMachineImage from '../../images/全自动拆包机.jpg';
+import disperserImage from '../../images/吸粉机.jpg';
+import centrifugalClassifierImage from '../../images/离心分级机.jpg';
+import centrifugalDryerImage from '../../images/离心干燥机.jpg';
+import ballValveImage from '../../images/球阀.jpg';
+
+const products = [
+  {
+    name: '全自动拆包机',
+    description: '高效率自动化拆包设备,适用于25kg、50kg和75kg的小包装原料。',
+    image: unpackingMachineImage,
+  },
+  {
+    name: '吸粉机',
+    description: '确保超细粉体均匀分散，防止二次团聚，提高浆料产品质量。',
+    image: disperserImage,
+  },
+  {
+    name: '离心分级机',
+    description: '精确的颗粒分级设备，适用于湿法分级需求。',
+    image: centrifugalClassifierImage,
+  },
+  {
+    name: '离心干燥机',
+    description: '高效率的干燥设备，适用于各种湿物料的快速干燥处理。',
+    image: centrifugalDryerImage,
+  },
+  {
+    name: '球阀',
+    description: '应用于PTT聚合工程流体控制系统,具有快速开关和良好密封性能。',
+    image: ballValveImage,
+  },
+];
+---
+
+<Layout title="工艺设备 - 厦门唯特 | 唯特 | WT-TECHNIK">
+  <main class="container">
+    <h1>工艺设备</h1>
+    <p class="intro">机器为工艺服务，控制赋予机器生命</p>
+    
+    <div class="product-grid">
+      {products.map((product) => (
+        <div class="product-card">
+          <div class="image-container">
+            <Image 
+              src={product.image} 
+              alt={product.name}
+              width={400} 
+              height={300} 
+              format="webp"
+            />
+          </div>
+          <h2>{product.name}</h2>
+          <p>{product.description}</p>
+          <div class="button-container">
+            <a href={`/equipment/${product.name.toLowerCase().replace(/\s+/g, '-')}`} class="learn-more">了解更多</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    color: #EC6C39;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+
+  .intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .image-container {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .product-card h2 {
+    color: #333;
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+  }
+
+  .product-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    line-height: 1.6;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  .learn-more {
+    display: inline-block;
+    background-color: #EC6C39;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+  }
+
+  .learn-more:hover {
+    background-color: #d55a2b;
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .intro {
+      font-size: 1rem;
+    }
+  }
+</style>

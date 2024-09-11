@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+import unpackingMachineImage from '../../images/全自动拆包机.jpg';
+import disperserImage from '../../images/吸粉机.jpg';
+import centrifugalClassifierImage from '../../images/离心分级机.jpg';
+
+import ballValveImage from '../../images/球阀.jpg';
+import centrifugalDryerImage from '../../images/离心干燥机.jpg';
+
+const products = [
+  {
+    name: '全自动拆包机',
+    description: '高效率自动化拆包设备,适用于25kg、50kg和75kg的小包装原料。',
+    image: unpackingMachineImage,
+    slug: 'automatic-unpacking-machine',
+  },
+  {
+    name: '吸粉机',
+    description: '确保超细粉体均匀分散，防止二次团聚，提高浆料产品质量。',
+    image: disperserImage,
+    slug: 'powder-disperser',
+  },
+  {
+    name: '离心分级机',
+    description: '精确的颗粒分级设备，适用于湿法分级需求。',
+    image: centrifugalClassifierImage,
+    slug: 'centrifugal-classifier',
+  },
+  
+  {
+    name: '球阀',
+    description: '广泛应用于各种流体控制系统，具有快速开关和良好密封性能。',
+    image: ballValveImage,
+    slug: 'ball-valve',
+  },
+  {
+    name: '离心干燥机',
+    description: '高效率的干燥设备，适用于各种湿物料的快速干燥处理。',
+    image: centrifugalDryerImage,
+    slug: 'centrifugal-dryer',
+  },
+];
+
+export function getStaticPaths() {
+  console.log("Generating static paths...");
+  return products.map(product => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { slug } = Astro.params;
+const product = products.find(p => p.slug === slug);
+
+if (!product) {
+  return Astro.redirect('/404');
+}
+
+console.log('Current slug:', slug);
+console.log('Found product:', product);
+---
+
+<Layout title={`${product.name} - 厦门唯特 | 唯特 | WT-TECHNIK`}>
+  <main>
+    <h1>{product.name}</h1>
+    <Image src={product.image} alt={product.name} width={600} height={400} />
+    <p>{product.description}</p>
+    <!-- 这里可以添加更多产品详情 -->
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+  }
+  p {
+    line-height: 1.6;
+    color: #666;
+  }
+</style>

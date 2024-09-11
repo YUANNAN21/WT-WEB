@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// 导入服务相关图片
+import slurryProcessingImage from '../../images/slurry-processing.jpg';
+import sparePartsImage from '../../images/spare-parts.jpg';
+import onSiteServiceImage from '../../images/on-site-service.jpg';
+
+const services = [
+  {
+    title: '浆料调配代加工业务',
+    description: '提供专业的浆料调配和代加工服务,确保高品质和精确配方。',
+    image: slurryProcessingImage,
+  },
+  {
+    title: '备品备件',
+    description: '提供各种工业设备的备品备件,保证您的生产线持续运转。',
+    image: sparePartsImage,
+  },
+  {
+    title: '现场服务',
+    description: '包括现场动平衡及检测,为您的设备提供专业的现场维护和优化。',
+    image: onSiteServiceImage,
+  },
+];
+---
+
+<Layout title="服务 - 唯特 | 厦门唯特 | WT TECHNIK">
+  <main class="container">
+    <h1>我们的服务</h1>
+    <p class="intro">为您提供全方位的工业解决方案</p>
+    
+    <div class="service-grid">
+      {services.map((service) => (
+        <div class="service-card">
+          <div class="image-container">
+            <Image 
+              src={service.image} 
+              alt={service.title}
+              width={400} 
+              height={300} 
+              format="webp"
+            />
+          </div>
+          <h2>{service.title}</h2>
+          <p>{service.description}</p>
+          <div class="button-container">
+            <a href={`/service/${service.title.toLowerCase().replace(/\s+/g, '-')}`} class="learn-more">了解更多</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    color: #EC6C39;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .service-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .image-container {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .service-card h2 {
+    color: #333;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .service-card p {
+    color: #666;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  .learn-more {
+    display: inline-block;
+    background-color: #EC6C39;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  .learn-more:hover {
+    background-color: #d55a2b;
+  }
+
+  @media (max-width: 768px) {
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

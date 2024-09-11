@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const contactInfo = [
+  { icon: '📍', label: '地址', value: '厦门市思明区软件园观日路30号206' },
+  { icon: '📞', label: '电话', value: '18650712596' },
+  { icon: '✉️', label: '邮箱', value: 'info@wt-technik.com' }
+];
+---
+
+<Layout title="联系我们- 厦门唯特 | 唯特 | WT-TECHNIK">
+  <div class="container">
+    <h1 class="page-title">联系我们</h1>
+    <p class="intro">我们期待听到您的声音。无论您有任何问题、建议或合作意向,都欢迎与我们联系。</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>联系方式</h2>
+        <ul class="info-list">
+          {contactInfo.map(item => (
+            <li>
+              <span class="icon">{item.icon}</span>
+              <div>
+                <strong>{item.label}</strong>
+                <p>{item.value}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <form class="contact-form">
+        <h2>发送消息</h2>
+        <div class="form-group">
+          <label for="name">姓名</label>
+          <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
+        </div>
+        <div class="form-group">
+          <label for="email">邮箱</label>
+          <input type="email" id="email" name="email" required placeholder="请输入您的邮箱地址">
+        </div>
+        <div class="form-group">
+          <label for="message">消息</label>
+          <textarea id="message" name="message" required placeholder="请输入您的消息内容"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">发送</button>
+      </form>
+    </div>
+
+    <div class="map-container">
+      <h2>我们的位置</h2>
+      <div id="baiduMap"></div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function initMap() {
+    if (typeof BMap !== 'undefined') {
+      var map = new BMap.Map("baiduMap");
+      var point = new BMap.Point(118.180, 24.485); // 请替换为您公司的实际经纬度
+      map.centerAndZoom(point, 15);
+      var marker = new BMap.Marker(point);
+      map.addOverlay(marker);
+      marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+      map.enableScrollWheelZoom(true);
+
+      // 添加控件
+      map.addControl(new BMap.NavigationControl());
+      map.addControl(new BMap.ScaleControl());
+      map.addControl(new BMap.OverviewMapControl());
+      map.addControl(new BMap.MapTypeControl());
+
+      // 添加信息窗口
+      var infoWindow = new BMap.InfoWindow("厦门唯特机电有限公司", {
+        width : 250,
+        height: 100,
+        title : "公司信息"
+      });
+      marker.addEventListener("click", () => {
+        marker.openInfoWindow(infoWindow);
+      });
+    } else {
+      console.error('百度地图API未正确加载');
+    }
+  }
+
+  // 确保在DOM加载完成后初始化地图
+  if (document.readyState === "complete") {
+    initMap();
+  } else {
+    window.addEventListener("load", initMap);
+  }
+</script>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .page-title {
+    color: #EC6C39;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+
+  .intro {
+    text-align: center;
+    color: #e0e0e0;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .contact-info, .contact-form {
+    background-color: #2a2a2a;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-info h2, .contact-form h2 {
+    color: #EC6C39;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  .info-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .info-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-list .icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: #EC6C39;
+  }
+
+  .info-list strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #e0e0e0;
+  }
+
+  .info-list p {
+    color: #a19d9d;
+    margin: 0;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #e0e0e0;
+    font-weight: bold;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #333;
+    color: #e0e0e0;
+  }
+
+  textarea {
+    height: 150px;
+    resize: vertical;
+  }
+
+  .submit-btn {
+    background-color: #EC6C39;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .submit-btn:hover {
+    background-color: #d55a2b;
+  }
+
+  .map-container {
+    margin-top: 3rem;
+  }
+
+  .map-container h2 {
+    color: #EC6C39;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+  }
+
+  #baiduMap {
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,185 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// 导入博客文章图片
+import industry40Image from '../../images/blog/industry-4-0.jpg';
+import sustainableChemistryImage from '../../images/blog/sustainable-chemistry.jpg';
+import equipmentEfficiencyImage from '../../images/blog/equipment-efficiency.png';
+import post1Image from '../../images/blog/post-1.jpg'; // 请确保此图片存在
+
+// 博客文章数据
+const blogPosts = [
+  {
+    title: '新文章标题',
+    date: '2023-07-10',
+    summary: '这是新添加的文章摘要。',
+    image: post1Image,
+    slug: 'post-1'
+  },
+  {
+    title: '工业4.0时代的智能制造趋势',
+    date: '2023-05-15',
+    summary: '探讨工业4.0如何改变制造业,以及企业如何适应这一革命性变化。',
+    image: industry40Image,
+    slug: 'industry-4-0-trends'
+  },
+  {
+    title: '化工行业的可持续发展实践',
+    date: '2023-06-02',
+    summary: '分析化工行业面临的环境挑战,以及领先企业采取的可持续发展策略。',
+    image: sustainableChemistryImage,
+    slug: 'sustainable-chemistry-practices'
+  },
+  {
+    title: '提高工业设备效率的5个关键方法',
+    date: '2023-06-20',
+    summary: '介绍提高工业设备运行效率的实用技巧,帮助企业降低成本并提高生产力。',
+    image: equipmentEfficiencyImage,
+    slug: 'improve-equipment-efficiency'
+  }
+];
+---
+
+<Layout title="博客 - 厦门唯特 | 唯特 | WT-TECHNIK">
+  <main class="container">
+    <h1>公司博客</h1>
+    <p class="intro">分享行业洞察、技术创新和公司动态</p>
+    
+    <div class="blog-grid">
+      {blogPosts.map((post) => (
+        <article class="blog-card">
+          <div class="image-wrapper">
+            <div class="image-container">
+              <Image 
+                src={post.image} 
+                alt={post.title}
+                width={400} 
+                height={225} 
+                format="webp"
+              />
+            </div>
+          </div>
+          <div class="content">
+            <h2>{post.title}</h2>
+            <time datetime={post.date}>{new Date(post.date).toLocaleDateString('zh-CN', {year: 'numeric', month: 'long', day: 'numeric'})}</time>
+            <p>{post.summary}</p>
+          </div>
+          <div class="button-container">
+            <a href={`/posts/${post.slug}/`} class="read-more">阅读全文</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    color: #EC6C39;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .image-wrapper {
+    padding: 1rem 1rem 0 1rem;
+  }
+
+  .image-container {
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 宽高比 */
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .content {
+    padding: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .blog-card h2 {
+    color: #333;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+  }
+
+  .blog-card time {
+    color: #666;
+    font-size: 0.875rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-card p {
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .button-container {
+    padding: 0 1.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .read-more {
+    display: inline-block;
+    background-color: #EC6C39;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  .read-more:hover {
+    background-color: #d55a2b;
+  }
+
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
