@@ -3,37 +3,37 @@ import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 
 // 导入博客文章图片
+import post1Image from '../../images/blog/post-1.png';
 import industry40Image from '../../images/blog/industry-4-0.jpg';
 import sustainableChemistryImage from '../../images/blog/sustainable-chemistry.jpg';
-import equipmentEfficiencyImage from '../../images/blog/equipment-efficiency.png';
-import post1Image from '../../images/blog/post-1.jpg'; // 请确保此图片存在
+import equipmentEfficiencyImage from '../../images/blog/equipment-efficiency.jpg';
 
 // 博客文章数据
 const blogPosts = [
   {
-    title: '新文章标题',
-    date: '2023-07-10',
-    summary: '这是新添加的文章摘要。',
+    title: 'Eplan电气制图',
+    date: '2024-9-11',
+    summary: '我们采用Eplan电气制图软件,规范电气图纸',
     image: post1Image,
     slug: 'post-1'
   },
   {
     title: '工业4.0时代的智能制造趋势',
-    date: '2023-05-15',
+    date: '2024-9-10',
     summary: '探讨工业4.0如何改变制造业,以及企业如何适应这一革命性变化。',
     image: industry40Image,
     slug: 'industry-4-0-trends'
   },
   {
     title: '化工行业的可持续发展实践',
-    date: '2023-06-02',
+    date: '2024-9-9',
     summary: '分析化工行业面临的环境挑战,以及领先企业采取的可持续发展策略。',
     image: sustainableChemistryImage,
     slug: 'sustainable-chemistry-practices'
   },
   {
     title: '提高工业设备效率的5个关键方法',
-    date: '2023-06-20',
+    date: '2024-9-8',
     summary: '介绍提高工业设备运行效率的实用技巧,帮助企业降低成本并提高生产力。',
     image: equipmentEfficiencyImage,
     slug: 'improve-equipment-efficiency'
@@ -43,7 +43,7 @@ const blogPosts = [
 
 <Layout title="博客 - 厦门唯特 | 唯特 | WT-TECHNIK">
   <main class="container">
-    <h1>公司博客</h1>
+    <h1>博客</h1>
     <p class="intro">分享行业洞察、技术创新和公司动态</p>
     
     <div class="blog-grid">
@@ -52,7 +52,7 @@ const blogPosts = [
           <div class="image-wrapper">
             <div class="image-container">
               <Image 
-                src={post.image} 
+                src={post.image}
                 alt={post.title}
                 width={400} 
                 height={225} 
@@ -73,7 +73,6 @@ const blogPosts = [
     </div>
   </main>
 </Layout>
-
 
 <style>
   .container {
@@ -120,7 +119,7 @@ const blogPosts = [
 
   .image-container {
     width: 100%;
-    padding-top: 56.25%; /* 16:9 宽高比 */
+    padding-top: 56.25%;
     position: relative;
     overflow: hidden;
     border-radius: 8px;

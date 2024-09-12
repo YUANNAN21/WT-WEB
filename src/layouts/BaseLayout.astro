@@ -1,0 +1,32 @@
+---
+
+interface Props {
+  title: string;
+  pageTitle: string;
+}
+
+const { pageTitle, title } = Astro.props; // 确保接收了 pageTitle 和 title
+---
+
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <header>
+      <!-- 在这里添加您的导航栏或页眉内容 -->
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <!-- 在这里添加您的页脚内容 -->
+    </footer>
+  </body>
+</html>

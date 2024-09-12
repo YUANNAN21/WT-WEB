@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import { ViewTransitions } from 'astro:transitions';
 import { Image } from 'astro:assets';
 
-
 const services = [
   { title: '工艺设备', description: '客制化工业设备解决方案', link: '/process-equipment', icon: '🏭' },
   { title: '化工原料', description: '化工原料供应', link: '/chemical', icon: '🧪' },
@@ -25,7 +24,7 @@ const customers = [
 
 <Layout title="首页 - 厦门唯特 | 唯特 | WT-TECHNIK">
   <main>
-    <section class="hero">
+    <section class="hero full-width">
       <div class="hero-image">
         <img src="/hero-image.png" alt="Hero Image" />
       </div>
@@ -36,7 +35,7 @@ const customers = [
       </div>
     </section>
 
-    <section class="services">
+    <section class="services full-width">
       <h2>我们的服务</h2>
       <div class="service-grid">
         {services.map((service) => (
@@ -49,7 +48,7 @@ const customers = [
       </div>
     </section>
 
-    <section class="customers">
+    <section class="customers full-width">
       <h2>我们的客户</h2>
       <div class="customer-slider-container">
         <div class="customer-slider">
@@ -62,24 +61,41 @@ const customers = [
       </div>
     </section>
 
-    <section class="about">
+    <section class="about full-width">
       <h2>关于我们</h2>
-      <p>厦门唯特机电有限公司成立于2006年，是一家小型技术型公司，拥有自有进出口权。我们致力于为客户提供高品质、高效率的一站式解决方案。</p>
+      <p>厦门唯特机电有限公司成立于2006年，是一家小型技术型公司，拥有自有进出口权,愿为广大客户提供更好的服务！</p>
     </section>
   </main>
 </Layout>
 
 <style>
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
   main {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
     padding: 2rem;
+  }
+
+  .full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 
   .hero {
     position: relative;
-    width: 100%;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
   }
 
@@ -99,50 +115,54 @@ const customers = [
   }
 
   .hero-content {
-    position: relative;
-    z-index: 1;
     text-align: center;
-    padding: 2rem;
     color: white;
+    padding: 2rem;
     background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    transform: translateY(50px);
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
   }
-
   .hero h1 {
     font-size: 3rem;
-    color: var(--color-primary);
     margin-bottom: 1rem;
   }
 
   .hero p {
-    font-size: 1.2rem;
-    color: var(--color-text-secondary);
+    font-size: 1.5rem;
     margin-bottom: 2rem;
   }
 
   .cta-button {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 2rem;
     background-color: var(--color-primary);
     color: white;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
 
   .cta-button:hover {
     background-color: var(--color-primary-dark);
+    transform: translateY(-3px);
   }
 
-  .services {
-    margin-bottom: 4rem;
+  .services-section {
+    padding: 4rem 2rem;
+    background-color: var(--color-bg-secondary);
+    transform: translateY(50px);
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.5s forwards;
   }
 
-  .services h2 {
-    font-size: 2.5rem;
-    color: var(--color-primary);
+  .services-section h2 {
     text-align: center;
+    font-size: 2.5rem;
     margin-bottom: 2rem;
+    color: var(--color-primary);
   }
 
   .service-grid {
@@ -152,17 +172,19 @@ const customers = [
   }
 
   .service-card {
-    background-color: var(--color-bg-secondary);
+    background-color: var(--color-bg);
     padding: 2rem;
     border-radius: 10px;
     text-align: center;
     text-decoration: none;
     color: var(--color-text);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .service-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   .service-icon {
@@ -202,6 +224,7 @@ const customers = [
     justify-content: center;
     width: 150px;
     height: 100px;
+    margin-right: 2rem;
     transition: transform 0.3s ease;
   }
 

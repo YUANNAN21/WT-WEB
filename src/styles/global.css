@@ -41,6 +41,9 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100vw; /* 新增 */
+  height: 100vh; /* 新增 */
+  box-sizing: border-box; /* 新增 */
 }
 
 header {
@@ -289,6 +292,59 @@ h2 {
   margin: 0 auto;
   text-align: center;
 }
+
+/* 默认（亮色）模式下的背景色 */
+.services,
+.customers,
+.about {
+  background-color: #F8F9FA;
+}
+
+/* 默认（亮色）模式下的卡片背景色 */
+.services .service-card,
+.customers .customer-logo,
+.about {
+  background-color: var(--color-card-bg);
+}
+
+/* 暗色模式下的背景色和卡片背景色 */
+body.dark .services,
+body.dark .customers,
+body.dark .about {
+  background-color: #1A1A1A;
+}
+
+body.dark .services .service-card,
+body.dark .customers .customer-logo,
+body.dark .about {
+  background-color: var(--color-card-bg);
+}
+
+
+.services,
+.customers,
+.about {
+  background-color: #F8F9FA; /* 亮色模式下的背景色 */
+}
+/* 亮色模式下的卡片背景色 */
+.services .service-card,
+.customers .customer-logo,
+.about {
+  background-color: var(--color-card-bg);
+}
+/* 暗色模式下的背景色和卡片背景色 */
+.dark .services,
+.dark .customers,
+.dark .about,
+.dark .services .service-card,
+.dark .customers .customer-logo,
+.dark .about {
+  background-color: #1A1A1A;
+}
+
+
+
+
 
 /* 响应式设计 */
 @media (max-width: 768px) {
